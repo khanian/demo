@@ -16,9 +16,9 @@ public class MaxFlowEdmondsKarp {
         }
     }
 
-    public static List<Edge>[] createGraph(int nodes) {
-        List<Edge>[] graph = new List[nodes];
-        for (int i = 0; i < nodes; i++)
+    public static List<Edge>[] createGraph(int edges) {
+        List<Edge>[] graph = new List[edges];
+        for (int i = 0; i < edges; i++)
             graph[i] = new ArrayList<>();
         return graph;
     }
@@ -60,10 +60,19 @@ public class MaxFlowEdmondsKarp {
 
     // Usage example
     public static void main(String[] args) {
-        List<Edge>[] graph = createGraph(3);
+        List<Edge>[] graph = createGraph(4);
         addEdge(graph, 0, 1, 3);
         addEdge(graph, 0, 2, 2);
         addEdge(graph, 1, 2, 2);
         System.out.println(4 == maxFlow(graph, 0, 2));
+
+        List<Edge>[] graph1 = createGraph(5);
+        addEdge(graph1, 0, 1, 3);
+        addEdge(graph1, 0, 2, 2);
+        addEdge(graph1, 2, 1, 5);
+        addEdge(graph1, 1, 3, 2);
+        addEdge(graph1, 2, 3, 2);
+        System.out.println(4 == maxFlow(graph1, 0, 3));
+
     }
 }
