@@ -1,11 +1,12 @@
 package com.example.demo.homework;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MaxFlowEdmondsKarp {
 
     static class Edge {
-        int s, t, rev, cap, f;
+        int s, t, rev, cap, flow;
 
         public Edge(int s, int t, int rev, int cap) {
             this.s = s;
@@ -28,7 +29,7 @@ public class MaxFlowEdmondsKarp {
     }
 
     public static int maxFlow(List<Edge>[] graph, int s, int t) {
-        int flow = 0;
+        int maxFlow = 0;
         int[] q = new int[graph.length];
         while (true) {
             int qt = 0;
@@ -37,7 +38,7 @@ public class MaxFlowEdmondsKarp {
             for (int qh = 0; qh < qt && pred[t] == null; qh++) {
                 int cur = q[qh];
                 for (Edge e : graph[cur]) {
-                    if (pred[e.t] == null && e.cap > e.f) {
+                    if (pred[e.t] == null && e.cap > e.flow) {
                         pred[e.t] = e;
                         q[qt++] = e.t;
                     }
@@ -47,14 +48,14 @@ public class MaxFlowEdmondsKarp {
                 break;
             int df = Integer.MAX_VALUE;
             for (int u = t; u != s; u = pred[u].s)
-                df = Math.min(df, pred[u].cap - pred[u].f);
+                df = Math.min(df, pred[u].cap - pred[u].flow);
             for (int u = t; u != s; u = pred[u].s) {
-                pred[u].f += df;
-                graph[pred[u].t].get(pred[u].rev).f -= df;
+                pred[u].flow += df;
+                graph[pred[u].t].get(pred[u].rev).flow -= df;
             }
-            flow += df;
+            maxFlow += df;
         }
-        return flow;
+        return maxFlow;
     }
 
     // Usage example
