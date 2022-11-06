@@ -27,6 +27,29 @@ public class Dijkstra {
         }
     }
 
+
+    /*
+    *
+10 16
+1
+1 2 7
+1 3 2
+1 4 3
+2 5 5
+2 8 3
+3 2 4
+4 6 1
+4 7 6
+5 6 3
+6 7 1
+6 8 4
+6 9 6
+8 9 5
+7 10 9
+8 10 8
+9 10 7
+    *
+    * */
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
